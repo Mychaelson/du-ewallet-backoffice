@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
@@ -12,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement('create schema if not exists backoffice authorization ewallet');
+        DB::statement('create schema if not exists log authorization ewallet');
     }
 
     /**
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::statement('drop schema if exists backoffice cascade');
+        DB::statement('drop schema if exists log cascade');
     }
 };
