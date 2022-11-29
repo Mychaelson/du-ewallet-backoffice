@@ -1,0 +1,70 @@
+<?php
+
+namespace App\Http\Controllers\Wallet;
+
+use App\Http\Controllers\Controller;
+use App\Repositories\Wallet\HistoryRepository;
+use Illuminate\Http\Request;
+
+class HistoryController extends Controller
+{
+    protected $mod_alias = 'wallet-history';
+    protected $mod_active = 'wallet,wallet-history';
+
+    public function index(Request $request)
+    {        
+        $historyRepository = new HistoryRepository();
+
+        $this->page->blocked_page($this->mod_alias);
+        $this->viewdata['mod_alias'] = $this->mod_alias;
+        $this->viewdata['mod_active'] = $this->mod_active;
+        $this->viewdata['transactions_type'] = $historyRepository->getTransactionType();
+        $this->viewdata['wallet'] = $request->input('wallet');
+
+        $this->viewdata['page_title'] = 'Transaction Histories';
+        return view('wallet.history.content', $this->viewdata);
+    }
+
+    public function dataTable(Request $request)
+    {
+        $historyRepository = new HistoryRepository();
+
+        $query = $request->input('query');
+
+        $limit = (int) (isset($request->pagination['perpage']) && is_numeric($request->pagination['perpage']) ? $request->pagination['perpage'] : 10);
+        $page  = (int) (isset($request->pagination['page']) && is_numeric($request->pagination['page']) ? $request->pagination['page'] : 0);
+        $offset = $page > 0 ? (($page - 1) * $limit) : 0;
+
+        $viewdata = [];
+
+		$total_row = 0;
+
+        $get_data = $historyRepository->getHistoryList($query);
+
+        $paginator = $get_data->paginate($limit, ['*'], 'pagination.page');
+
+        $total_row = $paginator->total();
+
+        if($total_row == 0)
+        {
+            return response()->json([
+                'status' => TRUE,
+                'total_row' => $total_row
+            ]);
+        }
+    
+
+        $viewdata['limit'] = $limit;
+        $viewdata['query'] = $query;
+        $viewdata['paginator'] = $paginator;
+    
+
+        return response()->json([
+            'status' => TRUE,
+            'filter' => $query,
+            'total_row' => $total_row,
+            'paginator' => $paginator,
+            'content' => view('wallet.history.table', $viewdata)->render()
+        ]);
+    }
+}
