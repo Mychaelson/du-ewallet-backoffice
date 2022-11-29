@@ -109,6 +109,7 @@ var dt_load = function() {
                     return false;
                 }
 				if(e.total_row > 0){
+                    console.log(e)
 					$('#report-table .alert').hide();
 					$('#report-table').append(e.content);
 				}
