@@ -12,7 +12,6 @@
                             <i class="flaticon-line-graph text-primary"></i>
                         </span>
                         <h3 class="card-label"> {{ $page_title }}
-                        {{ route('otp-active.dt') }}
                     </div>
                 </div>
                 <div class="card-body">
