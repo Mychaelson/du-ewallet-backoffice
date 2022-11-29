@@ -39,7 +39,7 @@
             <div class="card-body">
                 <div class="row m-2">
                     <div class="col-md-6">
-                        <img src="{{ asset('img/yamisok_logo.png') }}" class="w-50" style="background-color: black">
+                        <img src="{{ asset('img/dupay_logo.png') }}" class="w-50" style="background-color: black">
                     </div>
                     <div class="col-md-6 text-right">
                         <h5><strong>PT Yamisok Platform Indonesia</strong></h5>

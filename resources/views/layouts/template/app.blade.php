@@ -48,7 +48,7 @@
     <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
         <!--begin::Logo-->
         <a href="{{ url('') }}">
-            <img alt="Logo" src="{{ asset('img/yamisok_logo.png') }}" />
+            <img alt="Logo" src="{{ asset('img/dupay_logo.png') }}" />
         </a>
         <!--end::Logo-->
         <!--begin::Toolbar-->
@@ -90,7 +90,7 @@
                 <div class="brand flex-column-auto" id="kt_brand">
                     <!--begin::Logo-->
                     <a href="{{ url('') }}" class="brand-logo">
-                        <img alt="Logo" src="{{ asset('img/yamisok_logo.png') }}" />
+                        <img alt="Logo" src="{{ asset('img/dupay_logo.png') }}" />
                     </a>
                     <!--end::Logo-->
                     <!--begin::Toggle-->
