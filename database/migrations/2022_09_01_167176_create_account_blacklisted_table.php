@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::drop('accounts.blacklisted');
+        Schema::dropIfExists('accounts.blacklisted');
     }
 };

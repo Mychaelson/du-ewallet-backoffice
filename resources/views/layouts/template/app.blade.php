@@ -167,7 +167,7 @@
                                         class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ Auth::user()->name }}</span>
                                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
                                         <div class="symbol-label"
-                                            style="background-image:url('{{ asset('img/YamisokPay.png') }}')"></div>
+                                            style="background-image:url('{{ asset('img/dupay-symbol.png') }}')"></div>
                                     </span>
                                 </div>
                             </div>
@@ -226,7 +226,7 @@
             <!--begin::Header-->
             <div class="d-flex align-items-center mt-5">
                 <div class="symbol symbol-100 mr-5">
-                    <div class="symbol-label" style="background-image:url('{{ asset('img/YamisokPay.png') }}')"></div>
+                    <div class="symbol-label" style="background-image:url('{{ asset('img/dupay-symbol.png') }}')"></div>
                     <i class="symbol-badge bg-success"></i>
                 </div>
                 <div class="d-flex flex-column">
