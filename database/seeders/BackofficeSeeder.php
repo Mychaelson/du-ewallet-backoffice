@@ -271,7 +271,7 @@ class BackofficeSeeder extends Seeder
         DB::table('backoffice.module')->insert([
             'modid' => 27,
             'parent_id' => 26,
-            'mod_name' => 'Yamisok Pay Documents',
+            'mod_name' => 'DUPay Documents',
             'mod_alias' => 'all-documents',
             'permalink' => 'docs',
             'mod_order' => 1,
