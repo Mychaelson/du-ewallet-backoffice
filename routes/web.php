@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Setting\BankInstructionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -323,6 +324,11 @@ Route::namespace('\App\Http\Controllers\Setting')->group(function () {
         Route::get('edit-master-activity/{id}', 'MasterActivityController@edit')->name('edit-master-activity')->middleware(['auth:sanctum', 'verified']);
         Route::put('edit-process-master-activity', 'MasterActivityController@edit_process')->name('edit-process-master-activity')->middleware(['auth:sanctum', 'verified']);
         Route::delete('delete-master-activity{id}', 'MasterActivityController@delete')->name('delete-master-activity')->middleware(['auth:sanctum', 'verified']);
+
+        Route::get('/bank-instruction', ['as' => 'setting-bank-instruction', 'uses' => 'BankInstructionController@index'])->middleware(['auth:sanctum', 'verified']);
+        Route::post('/bank-instruction/data-table', ['as' => 'bank-instruction.dt', 'uses' => 'BankInstructionController@data_tables'])->middleware('ajax');
+        Route::get('/bank-instruction/detail/{id}', ['as' => 'setting-bank-instruction-detail', 'uses' => 'BankInstructionController@bankInstructionDetail'])->middleware(['auth:sanctum', 'verified']);
+        Route::post('/bank-instruction/detail/data-table', ['as' => 'bank-instruction-detail.dt', 'uses' => 'BankInstructionController@data_tables_detail'])->middleware('ajax');
     });
 });
 
