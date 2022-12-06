@@ -43,4 +43,28 @@ class BankInstructionRepository
 
         return $data->first();
     }
+
+    public function getMethodTitle ($instructionTitle) {
+        $data = DB::table('accounts.bank_instruction_lines')
+                    ->leftJoin('accounts.bank_instruction', 'accounts.bank_instruction_lines.instruction_id', 'accounts.bank_instruction.id')
+                    ->leftJoin('accounts.banks', 'accounts.banks.id', '=', 'accounts.bank_instruction.bank_id')
+                    ->select('accounts.banks.name', 'accounts.bank_instruction_lines.title');
+
+        if (isset($instructionTitle)) {
+            $data->where('accounts.bank_instruction_lines.title', $instructionTitle);
+        }
+
+        return $data->first();
+    }
+
+    public function getDetailMethod ($query){
+        $data = DB::table('accounts.bank_instruction_lines')
+                    ->orderBy('steps', 'asc'); 
+
+        if (isset($query['title'])) {
+            $data->where('accounts.bank_instruction_lines.title', $query['title']);
+        }
+
+        return $data;
+    }
 }

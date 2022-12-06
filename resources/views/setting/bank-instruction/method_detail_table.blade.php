@@ -7,7 +7,8 @@
         <table class="table table-bordered table-hover">
             <thead class="thead-light">
                 <tr>
-                    <th class="align-middle">Method</th>
+                    <th class="align-middle">Steps</th>
+                    <th class="align-middle">Steps Value</th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
@@ -15,9 +16,10 @@
                 @php $no = $paginator->firstItem(); @endphp
                 @foreach ($paginator as $val)
                     <tr class="daily-report pointer">
-                        <td class="">{{$val->title}}</td>
+                        <td class="">{{$val->steps}}</td>
+                        <td class="">{{$val->step_value}}</td>
                         <td class="text-center">
-                            <a href="{{url('setting/bank-instruction/method-detail',[$val->title])}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-info-circle"></i></a>
+                            <!-- <a href="{{url('setting/bank-instruction/method-detail',[$val->title])}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-info-circle"></i></a> -->
                         </td>
 
                     </tr>

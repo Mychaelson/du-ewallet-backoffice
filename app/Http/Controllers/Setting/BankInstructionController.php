@@ -116,4 +116,61 @@ class BankInstructionController extends Controller
             'data' => $get_data
         ]);
     }
+
+    public function bankInstructionMethodDetail($method){
+        $BankInstructionRepository = new BankInstructionRepository();
+
+        $this->page->blocked_page($this->mod_alias);
+        $this->viewdata['mod_alias'] = $this->mod_alias;
+        $this->viewdata['mod_active'] = $this->mod_active;
+        $bankInfo = $BankInstructionRepository->getMethodTitle($method);
+        $this->viewdata['page_title'] = $bankInfo->name." (".$bankInfo->title.") Method Detail";
+        $this->viewdata['idBank'] = $method;
+
+        return view('setting.bank-instruction.method_detail', $this->viewdata);
+    }
+
+    public function data_tables_method_detail(Request $request){
+        $BankInstructionRepository = new BankInstructionRepository();
+
+        $query = $request->input('query');
+    
+
+        $limit = (int) (isset($request->pagination['perpage']) && is_numeric($request->pagination['perpage']) ? $request->pagination['perpage'] : 10);
+        $page  = (int) (isset($request->pagination['page']) && is_numeric($request->pagination['page']) ? $request->pagination['page'] : 0);
+        $offset = $page > 0 ? (($page - 1) * $limit) : 0;
+
+        
+
+        $viewdata = [];
+		$total_row = 0;
+
+        $get_data = $BankInstructionRepository->getDetailMethod($query);
+
+        $paginator = $get_data->paginate($limit, ['*'], 'pagination.page');
+
+        $total_row = $get_data->count();
+
+        if($total_row == 0)
+        {
+            return response()->json([
+                'status' => TRUE,
+                'total_row' => $total_row
+            ]);
+        }
+
+
+        $viewdata['limit'] = $limit;
+        $viewdata['query'] = $query;
+        $viewdata['paginator'] = $paginator;
+
+
+        return response()->json([
+            'status' => TRUE,
+            'total_row' => $total_row,
+            'paginator' => $paginator,
+            'content' => view('setting.bank-instruction.method_detail_table', $viewdata)->render(),
+            'data' => $get_data
+        ]);
+    }
 }

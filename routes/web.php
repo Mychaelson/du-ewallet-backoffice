@@ -329,6 +329,8 @@ Route::namespace('\App\Http\Controllers\Setting')->group(function () {
         Route::post('/bank-instruction/data-table', ['as' => 'bank-instruction.dt', 'uses' => 'BankInstructionController@data_tables'])->middleware('ajax');
         Route::get('/bank-instruction/detail/{id}', ['as' => 'setting-bank-instruction-detail', 'uses' => 'BankInstructionController@bankInstructionDetail'])->middleware(['auth:sanctum', 'verified']);
         Route::post('/bank-instruction/detail/data-table', ['as' => 'bank-instruction-detail.dt', 'uses' => 'BankInstructionController@data_tables_detail'])->middleware('ajax');
+        Route::get('/bank-instruction/method-detail/{method}', ['as' => 'setting-bank-instruction-detail', 'uses' => 'BankInstructionController@bankInstructionMethodDetail'])->middleware(['auth:sanctum', 'verified']);
+        Route::post('/bank-instruction/detail/data-table', ['as' => 'bank-instruction-detail.dt', 'uses' => 'BankInstructionController@data_tables_method_detail'])->middleware('ajax');
     });
 });
 
