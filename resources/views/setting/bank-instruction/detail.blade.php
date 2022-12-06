@@ -34,23 +34,23 @@
 
                             <div class="mb-5">
                                 <div class="row align-items-center align-items-sm-start">
+                                    <div class="d-xxl-flex">
+                                        <select class="form-control form-control-lg mx-2" id="method">
+                                        @foreach ($listMethod as $value)
+                                            <option>{{$value->title}}</option>
+                                        @endforeach
+                                        </select>
+                                        <button
+                                            class="btn btn-light-primary mr-2 mr-xxl-6 mb-4 mb-lg-2 mb-xl-4 mb-xxl-0"
+                                            type="button" id="filterMethod">Filter
+                                        </button>
+                                    </div>
                                     <div class="col-md-8 col-xxl-3 col-lg-12 my-2 my-md-0 mb-0 mb-md-3">
                                         <div class="d-xxl-flex">
                                             <button
                                                 class="btn btn-light-success mr-2 mr-xxl-6 mb-4 mb-lg-2 mb-xl-4 mb-xxl-0"
                                                 type="button" id="submit-data"><i class="flaticon2-refresh"></i> Reload
                                                 Data</button>
-                                            <!-- <div class="flex-grow-1">
-                                                    <div class="input-daterange input-group date-range-period">
-                                                        <input type="text" class="m-input form-control" readonly="" id="start" placeholder="{{ \Carbon\Carbon::now()->format('d M Y') }}" data-selected="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
-                                                        <span class="input-group-append pointer">
-                                                            <span class="input-group-text">
-                                                                <i class="la la-calendar-check-o"></i>
-                                                            </span>
-                                                        </span>
-                                                        <input type="text" class="m-input form-control" readonly="" id="end" placeholder="{{ \Carbon\Carbon::now()->format('d M Y') }}" data-selected="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
-                                                    </div>
-                                                </div> -->
                                         </div>
                                     </div>
                                     <div class="col">
@@ -217,10 +217,7 @@
             return {
                 param: function() {
                     var e = {};
-                    // e.period=$(".date-range-period #start").attr('data-selected') + '/' + $(".date-range-period #end").attr('data-selected'),
-                    // e.group=$("#dt_select_group").val().toLowerCase(),
-                    // e.job=$("#dt_select_job").val().toLowerCase(),
-                    // e.searchNickname=$("#dt_search_nickname").val().toLowerCase(),
+                    e.method = $('#method').val(),
                     e.bank_instruction_id = $('#bank_instruction_id').val(),
                     e.pagination = {
                         'perpage': $('#pagination-perpage').val()
@@ -244,7 +241,7 @@
                             }
                         }
                     }
-                    $.post("{{ route('bank-instruction-detail.dt') }}", $data, function(e) {
+                    $.post("{{ route('bank-instruction-method-detail.dt') }}", $data, function(e) {
                         $('#report-table').find('#table-area').remove();
                         loader_tb.destroy();
                         if (!e.status) {
@@ -275,6 +272,11 @@
             dt_load.init(e);
 
             $('#submit-data').click(function() {
+                var e = dt_load.param();
+                dt_load.init(e);
+            });
+
+            $('#filterMethod').click(function() {
                 var e = dt_load.param();
                 dt_load.init(e);
             });

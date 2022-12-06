@@ -86,40 +86,46 @@
         </div>
     </div>
 
-    <!---Moda Create-->
+    <!---Modal Create-->
     <div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Create Bank Instruction</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('create-master-jobs') }}" method="POST" id="create-form">
+                    <form action="{{ route('create-bank-instruction-jobs') }}" method="POST" id="create-form">
                         @csrf
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Name Pekerjaan</label>
-                            <input type="text" name="nama_pekerjaan" class="form-control" placeholder="Nama Pekerjaan">
+                            <label for="method_name">Method Name</label>
+                            <input type="text" name="method" id="method_name" class="form-control" placeholder="Jobs Name" required>
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="Jobs Name" required>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Jobs Name</label>
-                            <input type="text" name="jobs_name" class="form-control" placeholder="Jobs Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Type</label>
-                            <select class="form-control" name="type">
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Hight">Hight</option>
+                            <label for="bank">Bank List</label>
+                            <select class="form-control form-control-lg" id="bank" name="bank_id" required>
+                            @foreach ($bank_list as $value)
+                                <option value={{$value->id}}>{{$value->name}}</option>
+                            @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="language">Language</label>
+                            <select class="form-control" name="lang" required>
+                                <option value="ID">ID</option>
+                                <option value="ENG">ENG</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" id="btn-save" class="btn btn-outline-primary">Save changes</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                    <button type="button" id="btn-save" class="btn btn-outline-primary">Save changes</button>
                 </div>
             </div>
         </div>
@@ -127,7 +133,7 @@
     <!--------------->
 
     <!---Moda Create-->
-    <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -167,7 +173,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--------------->
 @endsection
 
@@ -184,7 +190,7 @@
             })
         </script>
     @endif
-    <script>
+    <!-- <script>
         $(document).ready(function() {
             $('body').on('click', '#edit-data', function() {
                 var userURL = $(this).data('url');
@@ -207,7 +213,7 @@
         $('#btn-edit').on('click', function() {
             $('#edit-form').submit()
         });
-    </script>
+    </script> -->
     <script>
         var dt_load = function() {
             return {

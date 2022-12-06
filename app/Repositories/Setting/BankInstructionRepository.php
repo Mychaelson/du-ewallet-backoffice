@@ -29,6 +29,10 @@ class BankInstructionRepository
             $data->where('accounts.bank_instruction_lines.instruction_id','=', $query['bank_instruction_id']);
         }
 
+        if (isset($query['method'])) {
+            $data->where('accounts.bank_instruction_lines.title', $query['method']);
+        }
+
         return $data;
     }
 
@@ -41,14 +45,14 @@ class BankInstructionRepository
             $data->where('accounts.bank_instruction.id', $id);
         }
 
-        return $data->first();
+        return $data->toSql();
     }
 
     public function getMethodTitle ($instructionTitle) {
         $data = DB::table('accounts.bank_instruction_lines')
                     ->leftJoin('accounts.bank_instruction', 'accounts.bank_instruction_lines.instruction_id', 'accounts.bank_instruction.id')
                     ->leftJoin('accounts.banks', 'accounts.banks.id', '=', 'accounts.bank_instruction.bank_id')
-                    ->select('accounts.banks.name', 'accounts.bank_instruction_lines.title');
+                    ->select('accounts.banks.name', 'accounts.bank_instruction_lines.title', '');
 
         if (isset($instructionTitle)) {
             $data->where('accounts.bank_instruction_lines.title', $instructionTitle);
@@ -61,9 +65,33 @@ class BankInstructionRepository
         $data = DB::table('accounts.bank_instruction_lines')
                     ->orderBy('steps', 'asc'); 
 
-        if (isset($query['title'])) {
-            $data->where('accounts.bank_instruction_lines.title', $query['title']);
+        if (isset($query['method'])) {
+            $data->where('accounts.bank_instruction_lines.title', $query['method']);
         }
+
+        return $data;
+    }
+
+    public function getBank ($bank_id = null){
+        $data = DB::table('accounts.banks');
+
+        if (isset($bank_id)) {
+            $data->where('accounts.banks.id', $bank_id);
+
+            return $data->first();
+        }
+
+        return $data->get();
+    }
+
+    public function createBankInstruction ($data){
+        $data = DB::table('accounts.bank_instruction')->insert($data);
+
+        return $data;
+    }
+
+    public function getLastId () {
+        $data = DB::table('accounts.bank_instruction')->select('id')->orderBy('id', 'desc')->first();
 
         return $data;
     }
