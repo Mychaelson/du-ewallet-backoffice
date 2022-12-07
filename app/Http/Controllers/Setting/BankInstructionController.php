@@ -69,8 +69,7 @@ class BankInstructionController extends Controller
         $this->viewdata['mod_alias'] = $this->mod_alias;
         $this->viewdata['mod_active'] = $this->mod_active;
         $bankInfo = $BankInstructionRepository->getBankInfo($id);
-        dd($id, $bankInfo);
-        // $this->viewdata['page_title'] = $bankInfo->name." Detail";
+        $this->viewdata['page_title'] = $bankInfo->name." Detail";
         $listMethod = $BankInstructionRepository->detail(['bank_instruction_id' => $id])->get();
         $this->viewdata['idBank'] = $id;
         $this->viewdata['listMethod'] = $listMethod;

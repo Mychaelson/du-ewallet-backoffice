@@ -45,7 +45,7 @@ class BankInstructionRepository
             $data->where('accounts.bank_instruction.id', $id);
         }
 
-        return $data->toSql();
+        return $data->first();
     }
 
     public function getMethodTitle ($instructionTitle) {
