@@ -97,14 +97,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('create-bank-instruction-jobs') }}" method="POST" id="create-form">
+                    <form action="{{ route('create-bank-instruction') }}" method="POST" id="create-form">
                         @csrf
                         <div class="form-group">
                             <label for="method_name">Method Name</label>
-                            <input type="text" name="method" id="method_name" class="form-control" placeholder="Jobs Name" required>
+                            <input type="text" name="method" id="method_name" class="form-control" placeholder="Method Name" required>
+                        </div>
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <input type="text" name="title" id="title" class="form-control" placeholder="Jobs Name" required>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="Title" required>
                         </div>
                         <div class="form-group">
                             <label for="bank">Bank List</label>

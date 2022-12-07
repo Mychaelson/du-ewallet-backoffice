@@ -67,6 +67,8 @@ class BankInstructionRepository
 
         if (isset($query['method'])) {
             $data->where('accounts.bank_instruction_lines.title', $query['method']);
+        } else {
+            $data->where('accounts.bank_instruction_lines.title', '');
         }
 
         return $data;
@@ -90,8 +92,14 @@ class BankInstructionRepository
         return $data;
     }
 
-    public function getLastId () {
-        $data = DB::table('accounts.bank_instruction')->select('id')->orderBy('id', 'desc')->first();
+    public function getLastId ($table = 'bank_instruction') {
+        $data = DB::table('accounts.'.$table)->select('id')->orderBy('id', 'desc')->first();
+
+        return $data;
+    }
+
+    public function createBankInstructionLines ($data){
+        $data = DB::table('accounts.bank_instruction_lines')->insert($data);
 
         return $data;
     }

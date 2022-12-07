@@ -90,48 +90,69 @@
         </div>
     </div>
 
-    <!---Moda Create-->
+    <!---Modal Create-->
     <div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Create {{$page_title}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('create-master-jobs') }}" method="POST" id="create-form">
+                    <form action="{{ route('create-bank-instruction-detail') }}" method="POST" id="create-form">
                         @csrf
+
+                        @if (isset($idBank))
+                            <input hidden value="{{$idBank}}" id="bi_id" name="bankInstructionId" />
+                        @endif
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Name Pekerjaan</label>
-                            <input type="text" name="nama_pekerjaan" class="form-control" placeholder="Nama Pekerjaan">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Jobs Name</label>
-                            <input type="text" name="jobs_name" class="form-control" placeholder="Jobs Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Type</label>
-                            <select class="form-control" name="type">
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Hight">Hight</option>
+                            <label for="type">Type</label>
+                            <select class="form-control form-control-lg" id="type" required>
+                                <option value="new">New</option>
+                                <option value="existing">Existing</option>
                             </select>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                    <button type="button" id="btn-save" class="btn btn-outline-primary">Save changes</button>
-                </div>
+                        <div class="form-group" id="method-box">
+                            <label for="method">Method</label>
+                            <select class="form-control form-control-lg" id="current-method" name="method" required>
+                            @foreach ($listMethod as $value)
+                                <option>{{$value->title}}</option>
+                            @endforeach
+                            </select>
+                            <input type="text" name="new_method" class="form-control" placeholder="New Method" id="new-method" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="step">Steps Order</label>
+                            </select>
+                            <input type="number" name="step" class="form-control" placeholder="Step" id="step" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="step-value">Steps Value</label>
+                            </select>
+                            <input type="text" name="step_value" class="form-control" placeholder="Step Value" id="step-value" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="language">Language</label>
+                            <select class="form-control" name="lang" required>
+                                <option value="ID">ID</option>
+                                <option value="ENG">ENG</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btn-save" class="btn btn-outline-primary">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <!--------------->
 
     <!---Moda Create-->
-    <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -171,7 +192,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--------------->
 @endsection
 
@@ -188,7 +209,7 @@
             })
         </script>
     @endif
-    <script>
+    <!-- <script>
         $(document).ready(function() {
             $('body').on('click', '#edit-data', function() {
                 var userURL = $(this).data('url');
@@ -211,7 +232,7 @@
         $('#btn-edit').on('click', function() {
             $('#edit-form').submit()
         });
-    </script>
+    </script> -->
     <script>
         var dt_load = function() {
             return {
@@ -271,6 +292,19 @@
             var e = dt_load.param();
             dt_load.init(e);
 
+            if ($('#type').val() == 'new') {
+                $('#new-method').show()
+                $('#current-method').hide()
+                $('#current-method').removeAttr('required');
+                $('#new-method').prop('required',true);
+            } else {
+                $('#new-method').hide();
+                $('#current-method').show();
+                $('#new-method').removeAttr('required');
+                $("#new-method").val(null);
+                $('#current-method').prop('required',true);
+            }
+
             $('#submit-data').click(function() {
                 var e = dt_load.param();
                 dt_load.init(e);
@@ -285,6 +319,21 @@
             $('.search-text').keypress(function(e) {
                 if (e.keyCode == 13) {
                     $('#submit-data').trigger('click');
+                }
+            });
+
+            $('#type').change(function(e) {
+                if ($('#type').val() == 'new') {
+                    $('#new-method').show()
+                    $('#current-method').hide()
+                    $('#current-method').removeAttr('required');
+                    $('#new-method').prop('required',true);
+                } else {
+                    $('#new-method').hide();
+                    $('#current-method').show();
+                    $('#new-method').removeAttr('required');
+                    $("#new-method").val(null);
+                    $('#current-method').prop('required',true);
                 }
             });
 

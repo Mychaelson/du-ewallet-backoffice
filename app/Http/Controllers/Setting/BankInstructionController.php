@@ -141,4 +141,24 @@ class BankInstructionController extends Controller
 
         return redirect()->back()->with('message','Add Data Succeessfully');
     }
+
+    public function createDetail (Request $request){
+        $BankInstructionRepository = new BankInstructionRepository();
+
+        $getLastId = $BankInstructionRepository->getLastId('bank_instruction_lines');
+
+        $data = [
+            'id'                => $getLastId->id + 1,
+            'instruction_id'    => $request->bankInstructionId,
+            'title'             => $request->new_method ? $request->new_method : $request->method,
+            'steps'             => $request->step,
+            'step_type'         => 'text',
+            'step_value'        => $request->step_value,
+            'lang'              => $request->lang,
+        ];
+
+        $create = $BankInstructionRepository->createBankInstructionLines($data);
+
+        return redirect()->back()->with('message','Add Data Succeessfully');
+    }
 }

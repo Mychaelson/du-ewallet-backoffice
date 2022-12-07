@@ -332,7 +332,8 @@ Route::namespace('\App\Http\Controllers\Setting')->group(function () {
         // Route::get('/bank-instruction/method-detail/{method}', ['as' => 'setting-bank-instruction-detail', 'uses' => 'BankInstructionController@bankInstructionMethodDetail'])->middleware(['auth:sanctum', 'verified']);
         Route::post('/bank-instruction/method-detail/data-table', ['as' => 'bank-instruction-method-detail.dt', 'uses' => 'BankInstructionController@data_tables_method_detail'])->middleware('ajax');
 
-        Route::post('/bank-instruction/create', ['as' => 'create-bank-instruction-jobs', 'uses' => 'BankInstructionController@create'])->middleware(['auth:sanctum', 'verified']);
+        Route::post('/bank-instruction/create', ['as' => 'create-bank-instruction', 'uses' => 'BankInstructionController@create'])->middleware(['auth:sanctum', 'verified']);
+        Route::post('/bank-instruction-detail/create', ['as' => 'create-bank-instruction-detail', 'uses' => 'BankInstructionController@createDetail'])->middleware(['auth:sanctum', 'verified']);
     });
 });
 
