@@ -334,6 +334,8 @@ Route::namespace('\App\Http\Controllers\Setting')->group(function () {
 
         Route::post('/bank-instruction/create', ['as' => 'create-bank-instruction', 'uses' => 'BankInstructionController@create'])->middleware(['auth:sanctum', 'verified']);
         Route::post('/bank-instruction-detail/create', ['as' => 'create-bank-instruction-detail', 'uses' => 'BankInstructionController@createDetail'])->middleware(['auth:sanctum', 'verified']);
+
+        Route::delete('bank-instruction-detail/delete/{id}', ['as' => 'delete-method-detail', 'uses' => 'BankInstructionController@deleteDetail'])->middleware(['auth:sanctum', 'verified']);
     });
 });
 

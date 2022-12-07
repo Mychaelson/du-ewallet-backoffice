@@ -103,4 +103,10 @@ class BankInstructionRepository
 
         return $data;
     }
+
+    public function deleteDetailMethod($id){
+        $data = DB::table('accounts.bank_instruction_lines')->where('id', $id)->delete();
+
+        return $data;
+    }
 }

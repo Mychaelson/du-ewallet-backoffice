@@ -161,4 +161,12 @@ class BankInstructionController extends Controller
 
         return redirect()->back()->with('message','Add Data Succeessfully');
     }
+
+    public function deleteDetail ($id){
+        $BankInstructionRepository = new BankInstructionRepository();
+
+        $delete = $BankInstructionRepository->deleteDetailMethod($id);
+
+        return redirect()->back()->with('message','Delete Data Succeessfully');
+    }
 }
