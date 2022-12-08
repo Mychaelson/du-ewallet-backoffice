@@ -473,6 +473,15 @@ class BackofficeSeeder extends Seeder
             'mod_order' => 1,
         ]);
 
+        DB::table('backoffice.module')->insert([
+            'modid' => 50,
+            'parent_id' => 40,
+            'mod_name' => 'Bank Instruction',
+            'mod_alias' => 'setting-bank-instruction',
+            'permalink' => 'setting/bank-instruction',
+            'mod_order' => 1,
+        ]);
+
         $totalModules = implode(',', range(1, 50));
         DB::table('backoffice.roles')->insert([
             'id' => 1,

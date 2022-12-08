@@ -134,7 +134,7 @@
     <!--------------->
 
     <!---Moda Create-->
-    <!-- <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -144,26 +144,40 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('edit-process-master-jobs') }}" method="POST" id="edit-form">
+                    <form action="" method="POST" id="edit-form">
                         <input type="hidden" name="_method" value="PUT">
                         @csrf
                         <input type="hidden" name="req_id" id="edit-id">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Nama Pekerjaan</label>
-                            <input type="text" id="edit-nama-pekerjaan" name="nama_pekerjaan" class="form-control"
-                                placeholder="Name Activity">
+                            <label for="bank_name">Bank Name</label>
+                            <input type="text" id="bank_name" name="bank_name" class="form-control"
+                                placeholder="Bank Name" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Jobs Name</label>
-                            <input type="text" id="edit-jobs-name" name="jobs_name" class="form-control"
-                                placeholder="Groups Name">
+                            <label for="bank_code">Bank Code</label>
+                            <input type="text" id="bank_code" name="bank_code" class="form-control"
+                                placeholder="Bank Code" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Type</label>
-                            <select class="form-control" id="edit-type" name="type">
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Hight">Hight</option>
+                            <label for="transaction">Transaction</label>
+                            <input type="text" id="transaction" name="transaction" class="form-control"
+                                placeholder="Transaction" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_method_name">Method</label>
+                            <input type="text" id="edit_method_name" name="edit_method_name" class="form-control"
+                                placeholder="Method Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_title_name">Title</label>
+                            <input type="text" id="edit_title_name" name="edit_title_name" class="form-control"
+                                placeholder="Title Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_lang">Lang</label>
+                            <select class="form-control" id="edit_lang" name="lang" required>
+                                <option value="ID">ID</option>
+                                <option value="ENG">ENG</option>
                             </select>
                         </div>
                     </form>
@@ -174,7 +188,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <!--------------->
 @endsection
 
@@ -191,30 +205,29 @@
             })
         </script>
     @endif
-    <!-- <script>
+    <script>
         $(document).ready(function() {
             $('body').on('click', '#edit-data', function() {
                 var userURL = $(this).data('url');
                 $.get(userURL, function(data) {
-                    console.log(data.name_id)
+                    console.log(userURL)
                     $('#modal-edit').modal('show');
                     $('#edit-id').val(data.id);
-                    $('#edit-nama-pekerjaan').val(data.name_id);
-                    $('#edit-jobs-name').val(data.name_en);
-                    $('#edit-type').val(data.type).change();
+                    $('#bank_code').val(data.bank_code);
+                    $('#bank_name').val(data.bank_name);
+                    $('#transaction').val(data.transaction);
+                    $('#edit_method_name').val(data.method);
+                    $('#edit_title_name').val(data.title);
+                    $('#edit_lang').val(data.lang).change();
                 })
             });
 
         });
 
-        $('#btn-save').on('click', function() {
-            $('#create-form').submit()
-        });
-
         $('#btn-edit').on('click', function() {
             $('#edit-form').submit()
         });
-    </script> -->
+    </script>
     <script>
         var dt_load = function() {
             return {

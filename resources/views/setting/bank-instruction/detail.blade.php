@@ -6,12 +6,15 @@
         <!--begin::Container-->
         <div class="container-fluid">
             <div class="card card-custom gutter-b">
-                <div class="card-header">
+                <div class="card-header d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                     <div class="card-title">
                         <span class="card-icon">
                             <i class="flaticon-line-graph text-primary"></i>
                         </span>
                         <h3 class="card-label"> {{ $page_title }}
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <a href="{{ route('setting-bank-instruction') }}" class="btn btn-primary font-weight-bold">Back</a>
                     </div>
                 </div>
                 <div class="card-body">

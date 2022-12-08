@@ -169,4 +169,18 @@ class BankInstructionController extends Controller
 
         return redirect()->back()->with('message','Delete Data Succeessfully');
     }
+
+    public function deleteBankInstruction($id){
+        $BankInstructionRepository = new BankInstructionRepository();
+
+        $delete = $BankInstructionRepository->deleteBankInstruction($id);
+        
+        return redirect()->back()->with('message','Delete Data Succeessfully');
+    }
+
+    public function edit($id){
+        $BankInstructionRepository = new BankInstructionRepository();
+        $data = $BankInstructionRepository->index($id)->first();
+        return $data;
+    }
 }

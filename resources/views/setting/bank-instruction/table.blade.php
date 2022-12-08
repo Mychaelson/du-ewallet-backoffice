@@ -26,8 +26,14 @@
                         <td class="">{{$val->method}}</td>
                         <td class="">{{$val->title}}</td>
                         <td class="">{{$val->lang}}</td>
-                        <td class="text-center">
-                            <a href="{{url('setting/bank-instruction/detail',[$val->id])}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-info-circle"></i></a>
+                        <td class="text-center d-flex">
+                            <form action="{{ route('delete-method', ['id'=>$val->id]) }}" method="POST">
+                                @method('delete')
+                                @csrf
+                                <a href="{{url('setting/bank-instruction/detail',[$val->id])}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-info-circle"></i></a>
+                                <a href="javascript:void(0)" id="edit-data" data-url="{{ route('edit-bank-instruction', ['id' => $val->id]) }}" class="btn btn-outline-warning btn-sm"><i class="flaticon2-edit"></i></a>
+                                <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')"><i class="flaticon2-trash"></i></button>
+                            </form>
                         </td>
 
                     </tr>

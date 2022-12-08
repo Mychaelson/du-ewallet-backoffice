@@ -8,13 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class BankInstructionRepository
 {
-    public function index(){
+    public function index($id = null){
         $data = DB::table('accounts.bank_instruction')
                     ->leftJoin('accounts.banks', 'accounts.banks.id', '=', 'accounts.bank_instruction.bank_id')
                     ->select(
                                 'accounts.bank_instruction.transaction', 'accounts.bank_instruction.id', 'accounts.bank_instruction.method', 'accounts.bank_instruction.title', 
                                 'accounts.bank_instruction.lang','accounts.bank_instruction.bank_code', 'accounts.banks.name as bank_name'
                             );
+
+        if (isset($id)) {
+            $data->where('accounts.bank_instruction.id', $id);
+        }
 
         return $data;
     }
@@ -106,6 +110,25 @@ class BankInstructionRepository
 
     public function deleteDetailMethod($id){
         $data = DB::table('accounts.bank_instruction_lines')->where('id', $id)->delete();
+
+        return $data;
+    }
+
+    public function deleteBankInstruction($id){
+        $bankInstruction = DB::table('accounts.bank_instruction')->where('id', $id)->delete();
+
+        $instructionLines = DB::table('accounts.bank_instruction_lines')->where('instruction_id', $id)->delete();
+
+        return [
+            $bankInstruction,
+            $instructionLines
+        ];
+    }
+
+    public function edit($id){
+        $data = DB::table('accounts.bank_instruction')
+        ->where('id',$id)
+        ->first();
 
         return $data;
     }
