@@ -144,7 +144,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST" id="edit-form">
+                    <form action="{{ route('edit-process-bank-instruction') }}" method="POST" id="edit-form">
                         <input type="hidden" name="_method" value="PUT">
                         @csrf
                         <input type="hidden" name="req_id" id="edit-id">
@@ -180,12 +180,12 @@
                                 <option value="ENG">ENG</option>
                             </select>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                    <button type="button" id="btn-edit" class="btn btn-outline-primary">Save changes</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btn-edit" class="btn btn-outline-primary">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -224,9 +224,9 @@
 
         });
 
-        $('#btn-edit').on('click', function() {
-            $('#edit-form').submit()
-        });
+        // $('#btn-edit').on('click', function() {
+        //     $('#edit-form').submit()
+        // });
     </script>
     <script>
         var dt_load = function() {

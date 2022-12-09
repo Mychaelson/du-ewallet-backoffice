@@ -132,4 +132,12 @@ class BankInstructionRepository
 
         return $data;
     }
+
+    public function edit_bank_instruction ($id, $data, $table = 'bank_instruction'){
+        $data = DB::table('accounts.'.$table)
+                    ->where('id',$id)
+                    ->update($data);
+
+        return $data;
+    }
 }

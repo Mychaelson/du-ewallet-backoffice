@@ -183,4 +183,20 @@ class BankInstructionController extends Controller
         $data = $BankInstructionRepository->index($id)->first();
         return $data;
     }
+
+    public function edit_bank_instruction (Request $request){
+        $BankInstructionRepository = new BankInstructionRepository();
+
+        $id = $request->req_id;
+
+        $data = [
+            'method' => $request->edit_method_name,
+            'title' => $request->edit_title_name,
+            'lang' => $request->lang,
+        ];
+
+        $edit = $BankInstructionRepository->edit_bank_instruction($id, $data);
+
+        return redirect()->back()->with('message','Edit Data Succeessfully');
+    }
 }

@@ -339,6 +339,7 @@ Route::namespace('\App\Http\Controllers\Setting')->group(function () {
         Route::delete('bank-instruction-detail/delete/{id}', ['as' => 'delete-method-detail', 'uses' => 'BankInstructionController@deleteDetail'])->middleware(['auth:sanctum', 'verified']);
 
         Route::get('edit-bank-instruction/{id}', 'BankInstructionController@edit')->name('edit-bank-instruction')->middleware(['auth:sanctum', 'verified']);
+        Route::put('edit-process-bank-instruction', 'BankInstructionController@edit_bank_instruction')->name('edit-process-bank-instruction')->middleware(['auth:sanctum', 'verified']);
     });
 });
 
