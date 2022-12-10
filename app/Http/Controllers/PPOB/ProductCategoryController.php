@@ -18,7 +18,7 @@ class ProductCategoryController extends Controller
         $this->viewdata['page_title'] = 'Product';
 
 
-       return view('PPOB.ProductCategory.content',$this->viewdata);
+       return view('ppob.productsCategory.content',$this->viewdata);
     }
 
     public function create(){
@@ -29,7 +29,7 @@ class ProductCategoryController extends Controller
         $ProductCategoryRepository = new ProductCategoryRepository();
         $this->viewdata['data'] = $ProductCategoryRepository->get_parent();
 
-       return view('PPOB.ProductCategory.create',$this->viewdata);
+       return view('ppob.productsCategory.create',$this->viewdata);
     }
 
     public function store(Request $request){
@@ -48,7 +48,7 @@ class ProductCategoryController extends Controller
         $this->viewdata['data'] = $ProductCategoryRepository->edit($id);
         $this->viewdata['parent'] = $ProductCategoryRepository->get_parent();
 
-        return view('PPOB.ProductCategory.edit  ',$this->viewdata);
+        return view('ppob.productsCategory.edit  ',$this->viewdata);
     }
 
     public function update(Request $request,$id){
@@ -94,7 +94,7 @@ class ProductCategoryController extends Controller
             'status' => TRUE,
             'total_row' => $total_row,
             'paginator' => $paginator,
-            'content' => view('PPOB.ProductCategory.table', $viewdata)->render()
+            'content' => view('ppob.productsCategory.table', $viewdata)->render()
         ]);
     }
 }

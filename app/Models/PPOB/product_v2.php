@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class product_v2 extends Model
 {
-    protected $table ='ppob.product_v2';
+    protected $table ='ppob.products';
 }

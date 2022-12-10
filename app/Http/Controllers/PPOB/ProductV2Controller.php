@@ -20,7 +20,7 @@ class ProductV2Controller extends Controller
         $ProductV2Repository = new ProductV2Repository();
         $this->viewdata['get_all'] = $ProductV2Repository->get_all_product();
 
-       return view('PPOB.ProductV2.content',$this->viewdata);
+       return view('ppob.productsV2.content',$this->viewdata);
     }
 
     public function edit($code){
@@ -32,7 +32,7 @@ class ProductV2Controller extends Controller
         $this->viewdata['data'] = $ProductV2Repository->detail_product($code);
         $this->viewdata['service'] = $ProductV2Repository->service($code);
 
-        return view('PPOB.ProductV2.edit',$this->viewdata);
+        return view('ppob.productsV2.edit',$this->viewdata);
     }
 
     public function detail($code){
@@ -79,7 +79,7 @@ class ProductV2Controller extends Controller
             'status' => TRUE,
             'total_row' => $total_row,
             'paginator' => $paginator,
-            'content' => view('PPOB.ProductV2.table', $viewdata)->render()
+            'content' => view('ppob.productsV2.table', $viewdata)->render()
         ]);
     }
 
