@@ -155,7 +155,7 @@
     <!--------------->
 
     <!---Moda Create-->
-    <!-- <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -165,37 +165,34 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('edit-process-master-jobs') }}" method="POST" id="edit-form">
+                    <form action="{{ route('edit-process-bank-instruction-detail') }}" method="POST" id="edit-form">
                         <input type="hidden" name="_method" value="PUT">
                         @csrf
                         <input type="hidden" name="req_id" id="edit-id">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Nama Pekerjaan</label>
-                            <input type="text" id="edit-nama-pekerjaan" name="nama_pekerjaan" class="form-control"
-                                placeholder="Name Activity">
+                            <label for="edit_title">Title</label>
+                            <input type="text" id="edit_title" name="edit_title" class="form-control"
+                                placeholder="Title" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Jobs Name</label>
-                            <input type="text" id="edit-jobs-name" name="jobs_name" class="form-control"
-                                placeholder="Groups Name">
+                            <label for="edit_step">Steps</label>
+                            <input type="number" id="edit_step" name="edit_step" class="form-control"
+                                placeholder="Steps" required>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Type</label>
-                            <select class="form-control" id="edit-type" name="type">
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Hight">Hight</option>
-                            </select>
+                            <label for="edit_steps_value">Steps Value</label>
+                            <input type="text" id="edit_steps_value" name="edit_steps_value" class="form-control"
+                                placeholder="Steps Value" required>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                    <button type="button" id="btn-edit" class="btn btn-outline-primary">Save changes</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btn-edit" class="btn btn-outline-primary">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div> -->
+    </div>
     <!--------------->
 @endsection
 
@@ -212,30 +209,21 @@
             })
         </script>
     @endif
-    <!-- <script>
+    <script>
         $(document).ready(function() {
             $('body').on('click', '#edit-data', function() {
                 var userURL = $(this).data('url');
                 $.get(userURL, function(data) {
-                    console.log(data.name_id)
                     $('#modal-edit').modal('show');
                     $('#edit-id').val(data.id);
-                    $('#edit-nama-pekerjaan').val(data.name_id);
-                    $('#edit-jobs-name').val(data.name_en);
-                    $('#edit-type').val(data.type).change();
+                    $('#edit_title').val(data.title);
+                    $('#edit_step').val(data.steps);
+                    $('#edit_steps_value').val(data.step_value);
                 })
             });
-
         });
 
-        $('#btn-save').on('click', function() {
-            $('#create-form').submit()
-        });
-
-        $('#btn-edit').on('click', function() {
-            $('#edit-form').submit()
-        });
-    </script> -->
+    </script>
     <script>
         var dt_load = function() {
             return {

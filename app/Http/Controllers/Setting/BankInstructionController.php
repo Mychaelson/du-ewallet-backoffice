@@ -199,4 +199,24 @@ class BankInstructionController extends Controller
 
         return redirect()->back()->with('message','Edit Data Succeessfully');
     }
+
+    public function editDetail($id){
+        $BankInstructionRepository = new BankInstructionRepository();
+        $data = $BankInstructionRepository->getDetailTransactionById($id);
+        return $data;
+    }
+
+    public function edit_bank_instruction_detail (Request $request){
+        $BankInstructionRepository = new BankInstructionRepository();
+
+        $id = $request->req_id;
+
+        $data = [
+            'steps' => $request->edit_step,
+            'step_value' => $request->edit_steps_value,
+        ];
+
+        $edit = $BankInstructionRepository->edit_bank_instruction($id, $data, 'bank_instruction_lines');
+        return redirect()->back()->with('message','Edit Data Succeessfully');
+    }
 }

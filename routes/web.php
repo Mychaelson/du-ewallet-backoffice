@@ -340,6 +340,9 @@ Route::namespace('\App\Http\Controllers\Setting')->group(function () {
 
         Route::get('edit-bank-instruction/{id}', 'BankInstructionController@edit')->name('edit-bank-instruction')->middleware(['auth:sanctum', 'verified']);
         Route::put('edit-process-bank-instruction', 'BankInstructionController@edit_bank_instruction')->name('edit-process-bank-instruction')->middleware(['auth:sanctum', 'verified']);
+
+        Route::get('edit-bank-instruction-detail/{id}', 'BankInstructionController@editDetail')->name('edit-bank-instruction-detail')->middleware(['auth:sanctum', 'verified']);
+        Route::put('edit-process-bank-instruction-detail', 'BankInstructionController@edit_bank_instruction_detail')->name('edit-process-bank-instruction-detail')->middleware(['auth:sanctum', 'verified']);
     });
 });
 

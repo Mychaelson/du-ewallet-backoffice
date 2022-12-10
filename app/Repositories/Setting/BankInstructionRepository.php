@@ -140,4 +140,10 @@ class BankInstructionRepository
 
         return $data;
     }
+
+    public function getDetailTransactionById ($id) {
+        $data = DB::table('accounts.bank_instruction_lines')->where('id', $id)->first();
+
+        return $data;
+    }
 }

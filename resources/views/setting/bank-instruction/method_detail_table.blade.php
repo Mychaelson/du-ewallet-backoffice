@@ -22,7 +22,7 @@
                             <form action="{{ route('delete-method-detail', ['id'=>$val->id]) }}" method="POST">
                                 @method('delete')
                                 @csrf
-                                <!-- <a href="javascript:void(0)" id="edit-data" data-url="{{ route('edit-master-activity', ['id' => $val->id]) }}" class="btn btn-outline-warning btn-sm"><i class="flaticon2-edit"></i></a> -->
+                                <a href="javascript:void(0)" id="edit-data" data-url="{{ route('edit-bank-instruction-detail', ['id' => $val->id]) }}" class="btn btn-outline-warning btn-sm"><i class="flaticon2-edit"></i></a>
                                 <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')"><i class="flaticon2-trash"></i></button>
                             </form>
                         </td>
