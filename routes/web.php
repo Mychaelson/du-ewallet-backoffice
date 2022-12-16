@@ -45,7 +45,7 @@ Route::namespace('WalletUser')->group(function () {
     Route::post('/user/kycpost/{id}', ['as' => 'user-kyc.update', 'uses' => 'KYCController@update'])->middleware(['auth:sanctum', 'verified']);
 
     Route::get('/user/closeaccount', ['as' => 'user-close-accounts', 'uses' => 'CloseAccountsController@index'])->middleware(['auth:sanctum', 'verified']);
-    Route::post('/user/kyc/data-table', ['as' => 'user-closeaccount.dt', 'uses' => 'CloseAccountsController@data_table'])->middleware('ajax');
+    Route::post('/user/closeaccount/data-table', ['as' => 'user-closeaccount.dt', 'uses' => 'CloseAccountsController@data_table'])->middleware('ajax');
     Route::get('/user/closeaccount/{id}', ['as' => 'user.closeaccount.form', 'uses' => 'CloseAccountsController@form'])->middleware(['auth:sanctum', 'verified']);
     Route::post('/user/closeaccount/store', ['as' => 'user-closeaccount-store', 'uses' => 'CloseAccountsController@store'])->middleware(['auth:sanctum', 'verified']);
 
