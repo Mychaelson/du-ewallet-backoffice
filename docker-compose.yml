@@ -1,0 +1,49 @@
+services:  
+  #PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: digitalocean.com/php
+    container_name: du-bo-v2
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: du_bo_v2
+      SERVICE_TAGS: du_bo_v2
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - du-bo-v2
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: webserverbo
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3000:80"
+      #- "4444:443"
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - du-bo-v2
+
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - REDIS_PORT_NUMBER=8989
+      - REDIS_PASSWORD=oidj2foi29fjidfowjo1j1fj10fodkj29f928
+    ports:
+    - '8989:8989'
+    networks:
+      - du-bo-v2
+
+#Docker Networks
+networks:
+  du-bo-v2:
+    driver: bridge
