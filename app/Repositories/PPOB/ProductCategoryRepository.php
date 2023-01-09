@@ -26,7 +26,7 @@ class ProductCategoryRepository
     }
 
     public function store($request){
-        $get_id = DB::table('ppob.ppob.categories')
+        $get_id = DB::table('ppob.categories')
             ->orderBy('id','desc')
             ->first();
 
@@ -53,7 +53,7 @@ class ProductCategoryRepository
     }
 
     public function edit($id){
-        $data = DB::table('ppob.ppob.categories')
+        $data = DB::table('ppob.categories')
         ->where('id',$id)
         ->first();
 
@@ -86,7 +86,7 @@ class ProductCategoryRepository
     }
 
     public function delete($id){
-        $data = DB::table('ppob.ppob.categories')
+        $data = DB::table('ppob.categories')
         ->where('id',$id)
         ->delete();
 

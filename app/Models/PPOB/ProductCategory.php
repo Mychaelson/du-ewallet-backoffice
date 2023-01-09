@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductCategory extends Model
 {
-    protected $table = 'ppob.ppob.categories';
+    protected $table = 'ppob.categories';
 
     public function child() {
         return $this->hasMany(ProductCategory::class,'parent_id','id');

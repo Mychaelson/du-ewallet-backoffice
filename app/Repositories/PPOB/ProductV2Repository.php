@@ -23,7 +23,7 @@ class ProductV2Repository
 
     public function detail($code){
         $data = DB::table('ppob.products as pv')
-        ->leftJoin('ppob.ppob.categories as ds','ds.id','=','pv.category_id')
+        ->leftJoin('ppob.categories as ds','ds.id','=','pv.category_id')
         ->leftJoin('ppob.service_v2 as sv','sv.id','=','pv.service_id')
         ->select('pv.code','pv.name','pv.description','pv.provider','pv.denom','pv.price_sell','pv.price_buy','pv.admin_fee','pv.discount','pv.status','pv.created_at','pv.product_type','ds.name as category_name','sv.name as name_service')
         ->where('pv.code',$code)

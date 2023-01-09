@@ -453,6 +453,7 @@ class BackofficeSeeder extends Seeder
             'mod_alias' => 'ppob',
             'permalink' => '',
             'mod_order' => 1,
+            'icon' => 'flaticon-notepad',
         ]);
 
         DB::table('backoffice.module')->insert([
@@ -482,12 +483,33 @@ class BackofficeSeeder extends Seeder
             'mod_order' => 1,
         ]);
 
-        $totalModules = implode(',', range(1, 50));
+        DB::table('backoffice.module')->insert([
+            'modid' => 51,
+            'parent_id' => 0,
+            'mod_name' => 'Merchant',
+            'mod_alias' => 'merchant',
+            'permalink' => '',
+            'mod_order' => 1,
+            'icon' => 'flaticon-cart',
+        ]);
+
+        DB::table('backoffice.module')->insert([
+            'modid' => 52,
+            'parent_id' => 51,
+            'mod_name' => 'Merchant',
+            'mod_alias' => 'merchant-list',
+            'permalink' => 'merchant/list',
+            'mod_order' => 1,
+        ]);
+
+
+        $totalModules = implode(',', range(1, 52));
         DB::table('backoffice.roles')->insert([
             'id' => 1,
             'name' => 'Superadmin',
             'role' => '{"view":"'.$totalModules.'","create":"'.$totalModules.'","alter":"'.$totalModules.'","drop":"'.$totalModules.'"}',
         ]);
 
+        
     }
 }
